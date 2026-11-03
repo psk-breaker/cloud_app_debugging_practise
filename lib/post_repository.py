@@ -10,7 +10,7 @@ class PostRepository:
         rows = self._connection.execute('SELECT * from posts')
         posts = []
         for row in rows:
-            item = Post(row["title"], row["tags"], row["content"], row["id"])
+            item = Post(row["title"], row["content"], row["tags"], row["id"])
             posts.append(item)
         return posts
 
@@ -25,7 +25,7 @@ class PostRepository:
     # Do you want to get its id back? Look into RETURNING id;
     def create(self, post):
         self._connection.execute('INSERT INTO posts (title, content, tags) VALUES (%s, %s, %s)', [
-                                 post.title, post.content, post.tags])
+                                 post.title, post.content, post.tags]) # "tagone, tagtwo"
         return None
 
     # Delete a post by its id

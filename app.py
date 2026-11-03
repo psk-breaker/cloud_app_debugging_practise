@@ -30,10 +30,11 @@ def posts_by_tag(tag):
 def create_post():
     connection = get_flask_database_connection(app)
     post_repository = PostRepository(connection)
-    new_post = Post(request.form['title'], request.form['content'], request.form['tags'].split(','))
+    new_post = Post(request.form['title'], request.form['content'], tags=request.form['tags'].split(','))
+    print(new_post.__dict__)
     post_repository.create(new_post)
     posts = post_repository.all()
-    return render_template('index.html', posts=posts)
+    return redirect('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
